@@ -1,0 +1,12 @@
+- hosts: 192.168.29.83
+  tasks:
+  - delegate_to: localhost
+    copy:
+       content: 'sshd_config_syslog_facility: "AUTHPRIV"'
+       dest: ./ssh_role/vars/main.yml
+    when: ansible_facts['os_family'] == "RedHat"
+
+
+- hosts: 192.168.29.83
+  roles:
+  - role: "./ssh_role"
